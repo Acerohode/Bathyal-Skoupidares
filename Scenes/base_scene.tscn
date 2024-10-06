@@ -1,0 +1,310 @@
+[gd_scene load_steps=27 format=3 uid="uid://d2n4quuapkxog"]
+
+[ext_resource type="Texture2D" uid="uid://btg5h38h0tqei" path="res://Assets/BG.png" id="1_n1gdc"]
+[ext_resource type="PackedScene" uid="uid://bsxv2cwfgbur1" path="res://Scenes/base.tscn" id="2_e0643"]
+[ext_resource type="Texture2D" uid="uid://cnfj8wmg0j6uv" path="res://Assets/Shield.png" id="3_85tc3"]
+[ext_resource type="PackedScene" uid="uid://xruegytt3ote" path="res://Scenes/skeleton.tscn" id="3_uwffn"]
+[ext_resource type="Texture2D" uid="uid://cuh0g6oc38ba" path="res://Assets/spritesheet (4).png" id="4_2l5d6"]
+[ext_resource type="Script" path="res://Scenes/turn_manager.gd" id="4_perwg"]
+[ext_resource type="Script" path="res://Cards/Card_Res.gd" id="5_cauoo"]
+[ext_resource type="Resource" uid="uid://dqt2uks1ewrw6" path="res://Cards/Buff.tres" id="6_0ilu3"]
+[ext_resource type="Resource" uid="uid://bsklygvlm5hfb" path="res://Cards/Scavenge.tres" id="7_h5gve"]
+[ext_resource type="Texture2D" uid="uid://drbnetwhfxy8n" path="res://Assets/IsoCover.png" id="7_ogqs3"]
+[ext_resource type="Resource" uid="uid://bt2sdqqa3gi24" path="res://Cards/Defend.tres" id="8_5gbhi"]
+[ext_resource type="Script" path="res://Scenes/isopod.gd" id="8_5wu1e"]
+[ext_resource type="Texture2D" uid="uid://bed6mnao4bgu4" path="res://Assets/IsoPage.png" id="9_bi1dy"]
+[ext_resource type="Resource" uid="uid://brb1e6s2mr4in" path="res://Cards/Steal.tres" id="9_h86cd"]
+[ext_resource type="Script" path="res://Cards/CardPile.gd" id="10_ciw6m"]
+[ext_resource type="Texture2D" uid="uid://dfakt2gjp5v3v" path="res://Assets/NextTurn.png" id="11_6vqsn"]
+[ext_resource type="Texture2D" uid="uid://of35xk3c2qaw" path="res://Assets/Meat.png" id="15_c0uao"]
+[ext_resource type="FontFile" uid="uid://bru2hdj2ae6lp" path="res://Cards/times new roman.ttf" id="15_to7wd"]
+[ext_resource type="FontFile" uid="uid://ipsl7sks3lee" path="res://Cards/times new roman italic.ttf" id="16_2kkfw"]
+[ext_resource type="FontFile" uid="uid://c7u58y54gsn6r" path="res://Cards/times new roman bold italic.ttf" id="17_734n5"]
+[ext_resource type="FontFile" uid="uid://xuah5hi4dr14" path="res://Cards/times new roman bold.ttf" id="18_en5w1"]
+[ext_resource type="Texture2D" uid="uid://bmjiktn16wwkp" path="res://Assets/IsoIMG0001.png" id="19_ohmnv"]
+
+[sub_resource type="Animation" id="Animation_uck5i"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_0wu13"]
+resource_name = "new_animation"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_illtv"]
+_data = {
+"RESET": SubResource("Animation_uck5i"),
+"new_animation": SubResource("Animation_0wu13")
+}
+
+[sub_resource type="Resource" id="Resource_qig5w"]
+script = ExtResource("10_ciw6m")
+cards = Array[ExtResource("5_cauoo")]([ExtResource("6_0ilu3"), ExtResource("7_h5gve"), ExtResource("8_5gbhi"), ExtResource("9_h86cd"), ExtResource("6_0ilu3"), ExtResource("6_0ilu3"), ExtResource("8_5gbhi"), ExtResource("7_h5gve"), ExtResource("9_h86cd"), ExtResource("8_5gbhi"), ExtResource("7_h5gve")])
+
+[node name="BaseScene" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-3.74543, 7.51317)
+scale = Vector2(0.51, 0.51)
+texture = ExtResource("1_n1gdc")
+
+[node name="Camera2D" type="Camera2D" parent="Sprite2D"]
+
+[node name="Base" parent="." instance=ExtResource("2_e0643")]
+position = Vector2(-373, -163)
+player_base = true
+
+[node name="Shield" type="Sprite2D" parent="Base"]
+visible = false
+position = Vector2(-15, 97)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_85tc3")
+
+[node name="Sprite2D" type="Sprite2D" parent="Base"]
+visible = false
+
+[node name="Base2" parent="." instance=ExtResource("2_e0643")]
+position = Vector2(427, -91)
+scale = Vector2(-1, 1)
+
+[node name="Shield" type="Sprite2D" parent="Base2"]
+visible = false
+position = Vector2(-15, 97)
+scale = Vector2(0.5, 0.5)
+
+[node name="Sprite2D" type="Sprite2D" parent="Base2"]
+visible = false
+position = Vector2(-62, -23)
+texture = ExtResource("4_2l5d6")
+hframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Base2/Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_illtv")
+}
+autoplay = "new_animation"
+speed_scale = 0.5
+
+[node name="Skeleton" parent="." instance=ExtResource("3_uwffn")]
+position = Vector2(25, -99)
+
+[node name="TurnManager" type="Node" parent="."]
+script = ExtResource("4_perwg")
+deck = SubResource("Resource_qig5w")
+
+[node name="Turn" type="TextureRect" parent="TurnManager"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1169.0
+offset_top = -1160.0
+offset_right = -112.0
+offset_bottom = -927.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_6vqsn")
+
+[node name="Timer" type="Timer" parent="TurnManager"]
+one_shot = true
+
+[node name="Timer2" type="Timer" parent="TurnManager"]
+one_shot = true
+
+[node name="MeatTotal" type="Label" parent="TurnManager"]
+offset_left = -525.0
+offset_top = -341.0
+offset_right = -425.0
+offset_bottom = -318.0
+theme_override_fonts/font = ExtResource("15_to7wd")
+theme_override_font_sizes/font_size = 25
+text = "In game total: "
+
+[node name="MeatWin" type="Label" parent="TurnManager"]
+offset_left = -521.0
+offset_top = -308.0
+offset_right = -397.0
+offset_bottom = -268.0
+theme_override_fonts/font = ExtResource("15_to7wd")
+theme_override_font_sizes/font_size = 25
+text = "To win: "
+
+[node name="Meat" type="Sprite2D" parent="TurnManager"]
+position = Vector2(-571, -311)
+scale = Vector2(0.225487, 0.357388)
+texture = ExtResource("15_c0uao")
+
+[node name="Win" type="ColorRect" parent="TurnManager"]
+visible = false
+offset_left = -684.0
+offset_top = -373.0
+offset_right = 720.0
+offset_bottom = 395.0
+color = Color(0, 0, 0, 0.686275)
+
+[node name="Label" type="Label" parent="TurnManager/Win"]
+layout_mode = 0
+offset_left = 522.0
+offset_top = 302.0
+offset_right = 866.0
+offset_bottom = 426.0
+theme_override_fonts/font = ExtResource("15_to7wd")
+theme_override_font_sizes/font_size = 90
+text = "You win"
+
+[node name="Hand" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 203.0
+offset_top = 298.0
+offset_right = 203.0
+offset_bottom = 298.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="HandContainer" type="HBoxContainer" parent="Hand"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -363.0
+offset_top = -202.0
+offset_right = 419.0
+offset_bottom = 196.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 7
+alignment = 1
+
+[node name="Isopod" type="TextureRect" parent="Hand"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -781.0
+offset_top = -192.0
+offset_right = -398.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.75, 0.75)
+mouse_filter = 0
+texture = ExtResource("7_ogqs3")
+script = ExtResource("8_5wu1e")
+
+[node name="IsoPage" type="TextureRect" parent="Hand/Isopod"]
+show_behind_parent = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+texture = ExtResource("9_bi1dy")
+
+[node name="MarginContainer" type="MarginContainer" parent="Hand/Isopod/IsoPage"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Hand/Isopod/IsoPage/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Hand/Isopod/IsoPage/MarginContainer/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Name" type="RichTextLabel" parent="Hand/Isopod/IsoPage/MarginContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("15_to7wd")
+theme_override_fonts/italics_font = ExtResource("16_2kkfw")
+theme_override_fonts/bold_italics_font = ExtResource("17_734n5")
+theme_override_fonts/bold_font = ExtResource("18_en5w1")
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "[center][i] Bathynomus doederleinii[/i][/center]"
+
+[node name="Image" type="TextureRect" parent="Hand/Isopod/IsoPage/MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("19_ohmnv")
+
+[node name="Description" type="RichTextLabel" parent="Hand/Isopod/IsoPage/MarginContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(20, 120)
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("15_to7wd")
+theme_override_fonts/italics_font = ExtResource("16_2kkfw")
+theme_override_fonts/bold_italics_font = ExtResource("17_734n5")
+theme_override_fonts/bold_font = ExtResource("18_en5w1")
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+
+[node name="Buttons" type="HBoxContainer" parent="Hand/Isopod/IsoPage/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Left" type="Control" parent="Hand/Isopod/IsoPage/MarginContainer/Buttons"]
+custom_minimum_size = Vector2(191, 492)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Right" type="Control" parent="Hand/Isopod/IsoPage/MarginContainer/Buttons"]
+custom_minimum_size = Vector2(186, 492)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Grace_Timer" type="Timer" parent="Hand/Isopod"]
+one_shot = true

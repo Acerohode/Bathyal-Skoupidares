@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Card" load_steps=3 format=3 uid="uid://dqt2uks1ewrw6"]
+
+[ext_resource type="Texture2D" uid="uid://dkps4abmkfx7g" path="res://Assets/CardIMG0003.png" id="1_uuwgm"]
+[ext_resource type="Script" path="res://Cards/Card_Res.gd" id="1_xp3br"]
+
+[resource]
+script = ExtResource("1_xp3br")
+name = "[center][i]Bathynomus giganteusi[/i][/center]"
+image = ExtResource("1_uuwgm")
+type = 1
+tooltip = "[center]Buffs next 2 isopods to steal from opponent 3 chunks of meat[/center]"
+number = 5
+magnitude = 2

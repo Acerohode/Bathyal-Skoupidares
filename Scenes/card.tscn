@@ -1,0 +1,111 @@
+[gd_scene load_steps=8 format=3 uid="uid://b00ss4bjcwl51"]
+
+[ext_resource type="Script" path="res://Scenes/card.gd" id="1_ocsad"]
+[ext_resource type="Texture2D" uid="uid://d3yi3c0xtan33" path="res://Assets/CardBG.png" id="1_ouc4q"]
+[ext_resource type="FontFile" uid="uid://bru2hdj2ae6lp" path="res://Cards/times new roman.ttf" id="3_wugcq"]
+[ext_resource type="FontFile" uid="uid://ipsl7sks3lee" path="res://Cards/times new roman italic.ttf" id="4_vwsss"]
+[ext_resource type="FontFile" uid="uid://c7u58y54gsn6r" path="res://Cards/times new roman bold italic.ttf" id="5_xhspb"]
+[ext_resource type="FontFile" uid="uid://xuah5hi4dr14" path="res://Cards/times new roman bold.ttf" id="6_73lm3"]
+[ext_resource type="Texture2D" uid="uid://ukvwegqsog3s" path="res://Assets/CardIMG0000.png" id="7_gbmlp"]
+
+[node name="Card" type="Control"]
+custom_minimum_size = Vector2(256, 398)
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -325.0
+offset_right = -320.0
+offset_bottom = 73.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource("1_ocsad")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 341.0
+offset_bottom = 530.0
+scale = Vector2(0.75, 0.75)
+mouse_filter = 2
+texture = ExtResource("1_ouc4q")
+
+[node name="MarginContainer" type="MarginContainer" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 15
+
+[node name="Number" type="RichTextLabel" parent="TextureRect/MarginContainer"]
+custom_minimum_size = Vector2(110, 30)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("3_wugcq")
+theme_override_fonts/italics_font = ExtResource("4_vwsss")
+theme_override_fonts/bold_italics_font = ExtResource("5_xhspb")
+theme_override_fonts/bold_font = ExtResource("6_73lm3")
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+text = "Cost:"
+
+[node name="MarginContainer" type="MarginContainer" parent="TextureRect/MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 25
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect/MarginContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Name" type="RichTextLabel" parent="TextureRect/MarginContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("3_wugcq")
+theme_override_fonts/italics_font = ExtResource("4_vwsss")
+theme_override_fonts/bold_italics_font = ExtResource("5_xhspb")
+theme_override_fonts/bold_font = ExtResource("6_73lm3")
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "[center][i]Liponema brevicorne[/i][/center]"
+
+[node name="Image" type="TextureRect" parent="TextureRect/MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("7_gbmlp")
+
+[node name="Tooltip" type="RichTextLabel" parent="TextureRect/MarginContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("3_wugcq")
+theme_override_fonts/italics_font = ExtResource("4_vwsss")
+theme_override_fonts/bold_italics_font = ExtResource("5_xhspb")
+theme_override_fonts/bold_font = ExtResource("6_73lm3")
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "[center]Finds 5 more meat on the whale at the start of your next turn[/center]"
+fit_content = true
+scroll_active = false

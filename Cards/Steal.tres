@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Card" load_steps=3 format=3 uid="uid://brb1e6s2mr4in"]
+
+[ext_resource type="Texture2D" uid="uid://dh5bn44t53ihq" path="res://Assets/CardIMG0002.png" id="1_3w5uf"]
+[ext_resource type="Script" path="res://Cards/Card_Res.gd" id="1_duvfn"]
+
+[resource]
+script = ExtResource("1_duvfn")
+name = "[center][i]Histioteuthis heteropsis[/i][/center]"
+image = ExtResource("1_3w5uf")
+type = 1
+tooltip = "[center]Steals 4 meat from opponent[/center]"
+number = 3
+magnitude = 4

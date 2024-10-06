@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://d2n4quuapkxog"]
+
+[ext_resource type="Texture2D" uid="uid://btg5h38h0tqei" path="res://Assets/BG.png" id="1_n1gdc"]
+[ext_resource type="PackedScene" uid="uid://bsxv2cwfgbur1" path="res://Scenes/base.tscn" id="2_e0643"]
+[ext_resource type="PackedScene" uid="uid://xruegytt3ote" path="res://Scenes/skeleton.tscn" id="3_uwffn"]
+[ext_resource type="Script" path="res://Scenes/hand.gd" id="4_n10v5"]
+[ext_resource type="PackedScene" uid="uid://b00ss4bjcwl51" path="res://Scenes/card.tscn" id="4_xbgmu"]
+[ext_resource type="Resource" uid="uid://c4016cj2ey2x8" path="res://Scenes/HandCards.tres" id="5_mq5cs"]
+
+[node name="BaseScene" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.544481, 0.544481)
+texture = ExtResource("1_n1gdc")
+
+[node name="Camera2D" type="Camera2D" parent="Sprite2D"]
+
+[node name="Base" parent="." instance=ExtResource("2_e0643")]
+position = Vector2(-455, -14)
+
+[node name="Base2" parent="." instance=ExtResource("2_e0643")]
+position = Vector2(464, 1)
+scale = Vector2(-1, 1)
+
+[node name="Skeleton" parent="." instance=ExtResource("3_uwffn")]
+position = Vector2(-8, -25)
+
+[node name="TurnManager" type="Node" parent="."]
+
+[node name="Hand" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+script = ExtResource("4_n10v5")
+current_hand = ExtResource("5_mq5cs")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Hand"]
+layout_mode = 0
+offset_left = -456.0
+offset_top = 212.0
+offset_right = 233.0
+offset_bottom = 742.0
+mouse_filter = 2
+theme_override_constants/separation = 7
+
+[node name="Card" parent="Hand/HBoxContainer" instance=ExtResource("4_xbgmu")]
+layout_mode = 2
+
+[node name="Card2" parent="Hand/HBoxContainer" instance=ExtResource("4_xbgmu")]
+layout_mode = 2

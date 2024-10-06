@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://xruegytt3ote"]
+
+[ext_resource type="Script" path="res://Scenes/skeleton.gd" id="1_gippp"]
+[ext_resource type="Texture2D" uid="uid://c6xr7qiucypdp" path="res://Assets/Whale.png" id="1_xjkds"]
+[ext_resource type="Texture2D" uid="uid://of35xk3c2qaw" path="res://Assets/Meat.png" id="3_yoyn4"]
+[ext_resource type="FontFile" uid="uid://bru2hdj2ae6lp" path="res://Cards/times new roman.ttf" id="4_7nfi3"]
+
+[node name="Skeleton" type="Node2D"]
+script = ExtResource("1_gippp")
+
+[node name="Whale" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_xjkds")
+
+[node name="Meat" type="Sprite2D" parent="."]
+position = Vector2(-70, -89)
+scale = Vector2(0.150471, 0.150471)
+texture = ExtResource("3_yoyn4")
+
+[node name="Label" type="Label" parent="Meat"]
+offset_left = 159.0
+offset_top = -40.0
+offset_right = 312.0
+offset_bottom = 70.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_7nfi3")
+theme_override_font_sizes/font_size = 160
+text = "19"

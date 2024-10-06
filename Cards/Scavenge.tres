@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Card" load_steps=3 format=3 uid="uid://bsklygvlm5hfb"]
+
+[ext_resource type="Texture2D" uid="uid://be1whh2hj6vud" path="res://Assets/CardIMG0001.png" id="1_5u7jw"]
+[ext_resource type="Script" path="res://Cards/Card_Res.gd" id="1_7h6nb"]
+
+[resource]
+script = ExtResource("1_7h6nb")
+name = "[center][i]Liponema brevicorne[/i][/center]"
+image = ExtResource("1_5u7jw")
+type = 3
+tooltip = "[center]Finds 5 more meat on the whale[/center]"
+number = 2
+magnitude = 5
